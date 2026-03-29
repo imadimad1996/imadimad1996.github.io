@@ -515,8 +515,34 @@
         radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 26%),
         #0b1320;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: box-shadow 0.32s ease, border-color 0.32s ease;
     }
 
+    .showcase-media.is-transitioning {
+      border-color: rgba(115, 243, 255, 0.18);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 0 0 1px rgba(115, 243, 255, 0.08);
+    }
+
+    .showcase-visual {
+      width: 100%;
+      height: 100%;
+      transition:
+        filter 0.46s ease,
+        opacity 0.46s ease,
+        transform 0.46s ease;
+      will-change: filter, opacity, transform;
+      filter: saturate(1.04) contrast(1.03) brightness(0.97);
+    }
+
+    .showcase-media.is-transitioning .showcase-visual {
+      opacity: 0.8;
+      filter: saturate(0.82) contrast(0.92) brightness(0.84) blur(1.4px);
+      transform: scale(0.992);
+    }
+
+    .showcase-visual img,
     .showcase-media img,
     .showcase-placeholder {
       width: 100%;
@@ -610,6 +636,24 @@
       transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
 
+    .pause-button {
+      width: auto;
+      min-width: 5.4rem;
+      padding: 0 0.95rem;
+      font-weight: 600;
+    }
+
+    .pause-button[aria-pressed="true"] {
+      border-color: rgba(115, 243, 255, 0.35);
+      background: rgba(115, 243, 255, 0.1);
+    }
+
+    .pause-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.58;
+      transform: none;
+    }
+
     .icon-button:hover {
       transform: translateY(-2px);
       border-color: rgba(115, 243, 255, 0.35);
@@ -641,7 +685,7 @@
       border-radius: 1.1rem;
       background: rgba(255, 255, 255, 0.04);
       cursor: pointer;
-      transition: transform 0.18s ease, border-color 0.18s ease;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
     }
 
     .thumb:hover {
@@ -659,6 +703,18 @@
       height: 100%;
       display: block;
       object-fit: cover;
+      transition: filter 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
+      filter: saturate(0.82) contrast(0.96) brightness(0.82);
+      opacity: 0.9;
+    }
+
+    .thumb:hover img,
+    .thumb:hover .thumb-placeholder,
+    .thumb[aria-pressed="true"] img,
+    .thumb[aria-pressed="true"] .thumb-placeholder {
+      filter: none;
+      opacity: 1;
+      transform: scale(1.01);
     }
 
     .thumb-placeholder {
@@ -713,6 +769,7 @@
 
     .showcase-summary,
     .showcase-note,
+    .showcase-link-note,
     .resource-card p,
     .support-panel p,
     .library-card p,
@@ -754,6 +811,48 @@
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02)),
         rgba(10, 18, 32, 0.86);
+    }
+
+    .showcase-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .showcase-link-note {
+      font-size: 0.92rem;
+    }
+
+    .showcase-preview-link {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: inherit;
+    }
+
+    .showcase-preview-link:focus-visible {
+      outline: 2px solid rgba(115, 243, 255, 0.7);
+      outline-offset: -0.35rem;
+    }
+
+    .showcase-preview-pill {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0.3rem 0.72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(7, 13, 21, 0.72);
+      color: #effbff;
+      font-size: 0.84rem;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
     }
 
     .library-grid {
@@ -841,6 +940,15 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+    }
+
+    .library-links {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-left: auto;
     }
 
     .ghost-link {
@@ -1157,7 +1265,7 @@
 
         <div class="showcase-shell" id="showcase-shell">
           <div class="showcase-stage">
-            <div class="showcase-media" id="showcase-media" aria-live="polite"></div>
+            <div class="showcase-media" id="showcase-media" aria-live="off"></div>
             <div class="showcase-controls">
               <div class="control-group">
                 <button class="icon-button" id="prev-app" type="button" aria-label="Show previous app">
@@ -1165,6 +1273,9 @@
                 </button>
                 <button class="icon-button" id="next-app" type="button" aria-label="Show next app">
                   &#8594;
+                </button>
+                <button class="icon-button pause-button" id="toggle-autoplay" type="button" aria-pressed="true" aria-label="Pause automatic diaporama">
+                  Pause
                 </button>
               </div>
               <div class="progress" id="showcase-progress">1 / 14</div>
@@ -1176,6 +1287,12 @@
             <p class="showcase-kicker" id="showcase-type">Game concept</p>
             <h3 id="showcase-name">GapDash: Ball Reflex</h3>
             <p class="showcase-summary" id="showcase-summary"></p>
+            <div class="showcase-actions">
+              <a class="button primary" id="showcase-store-link" href="#" target="_blank" rel="noreferrer noopener" hidden>
+                Get on Google Play
+              </a>
+              <p class="showcase-link-note" id="showcase-link-note"></p>
+            </div>
             <div class="showcase-meta">
               <article class="meta-card">
                 <span>Format</span>
@@ -1338,6 +1455,7 @@
       {
         slug: "bounova",
         name: "BOUNOVA",
+        playUrl: "https://play.google.com/store/apps/details?id=labs.KestrelNebula.bounouva",
         category: "Arcade concept",
         format: "Game prototype",
         focus: "Explosive timing and visual punch",
@@ -1352,6 +1470,7 @@
       {
         slug: "gapdash-ball-reflex",
         name: "GapDash: Ball Reflex",
+        playUrl: "https://play.google.com/store/apps/details?id=com.tapball.app",
         category: "Reflex game",
         format: "Android game",
         focus: "Precision taps and score chasing",
@@ -1366,6 +1485,7 @@
       {
         slug: "heicflow",
         name: "HEICFlow: HEIC to JPG/PNG/PDF",
+        playUrl: "https://play.google.com/store/apps/details?id=com.heicflow.heicflow",
         category: "Conversion utility",
         format: "Android tool",
         focus: "Fast file conversion workflows",
@@ -1381,6 +1501,7 @@
       {
         slug: "livespeed-gps",
         name: "LiveSpeed GPS",
+        playUrl: "https://play.google.com/store/apps/details?id=com.livespeedgps",
         category: "GPS utility",
         format: "Android tool",
         focus: "Real-time speed visibility",
@@ -1409,6 +1530,7 @@
       {
         slug: "plynk",
         name: "PLYNK",
+        playUrl: "https://play.google.com/store/apps/details?id=labs.kestrelnb.plynk",
         category: "Abstract concept",
         format: "Android game",
         focus: "Minimal form and responsive feel",
@@ -1423,6 +1545,7 @@
       {
         slug: "slynk",
         name: "SLYNK",
+        playUrl: "https://play.google.com/store/apps/details?id=labs.KestreNebula.slynk",
         category: "Neon concept",
         format: "Android game",
         focus: "Smooth movement and glowing minimalism",
@@ -1437,6 +1560,7 @@
       {
         slug: "scanelix-scanner-pdf-tools",
         name: "Scanelix Scanner & PDF Tools",
+        playUrl: "https://play.google.com/store/apps/details?id=labs.kestrelnebula.scanelix",
         category: "Document utility",
         format: "Android productivity tool",
         focus: "Scan, organize, and export",
@@ -1451,6 +1575,7 @@
       {
         slug: "skyhold",
         name: "Skyhold",
+        playUrl: "https://play.google.com/store/apps/details?id=com.skyhold.game",
         category: "Fantasy concept",
         format: "Android game",
         focus: "Atmosphere and world identity",
@@ -1465,6 +1590,7 @@
       {
         slug: "trashpaws-runner",
         name: "TrashPaws Runner",
+        playUrl: "https://play.google.com/store/apps/details?id=com.trashpaws.runner",
         category: "Character runner",
         format: "Android game",
         focus: "Charming pacing and replay value",
@@ -1539,6 +1665,8 @@
     const nameNode = document.getElementById("showcase-name");
     const typeNode = document.getElementById("showcase-type");
     const summaryNode = document.getElementById("showcase-summary");
+    const storeLinkNode = document.getElementById("showcase-store-link");
+    const storeNoteNode = document.getElementById("showcase-link-note");
     const formatNode = document.getElementById("showcase-format");
     const focusNode = document.getElementById("showcase-focus");
     const statusNode = document.getElementById("showcase-status");
@@ -1549,8 +1677,17 @@
     const libraryGrid = document.getElementById("library-grid");
     const prevButton = document.getElementById("prev-app");
     const nextButton = document.getElementById("next-app");
+    const autoplayButton = document.getElementById("toggle-autoplay");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const AUTO_ADVANCE_MS = 2000;
+    const TRANSITION_CLASS_HOLD_MS = 70;
 
     let activeIndex = 0;
+    let autoAdvanceTimer = 0;
+    let transitionTimer = 0;
+    let userPausedAutoplay = false;
+    let hoverPausedAutoplay = false;
 
     function initialsFromName(name) {
       return name
@@ -1565,15 +1702,19 @@
     function renderArtwork(app, eager) {
       if (app.image) {
         return (
-          '<img src="' + app.image + '" alt="' + app.name + ' artwork" width="1200" height="900"' +
-          (eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"') +
-          " />"
+          '<div class="showcase-visual">' +
+            '<img src="' + app.image + '" alt="' + app.name + ' artwork" width="1200" height="900"' +
+            (eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"') +
+            " />" +
+          "</div>"
         );
       }
 
       return (
-        '<div class="showcase-placeholder">' +
-          '<div class="placeholder-mark">' + (app.initials || initialsFromName(app.name)) + "</div>" +
+        '<div class="showcase-visual">' +
+          '<div class="showcase-placeholder">' +
+            '<div class="placeholder-mark">' + (app.initials || initialsFromName(app.name)) + "</div>" +
+          "</div>" +
         "</div>"
       );
     }
@@ -1594,14 +1735,8 @@
       return '<div class="library-placeholder">' + (app.initials || initialsFromName(app.name)) + "</div>";
     }
 
-    function setActive(index) {
-      activeIndex = (index + APP_PORTFOLIO.length) % APP_PORTFOLIO.length;
-      const app = APP_PORTFOLIO[activeIndex];
-
-      shell.style.setProperty("--spotlight", app.accent);
-      shell.style.setProperty("--spotlight-soft", app.accentSoft);
-
-      media.innerHTML =
+    function renderShowcaseMedia(app) {
+      const content =
         renderArtwork(app, true) +
         '<div class="showcase-overlay">' +
           '<div>' +
@@ -1613,9 +1748,104 @@
           '<div class="badge">' + app.artwork + "</div>" +
         "</div>";
 
+      if (!app.playUrl) {
+        return content;
+      }
+
+      return (
+        '<a class="showcase-preview-link" href="' + app.playUrl + '" target="_blank" rel="noreferrer noopener" aria-label="Get ' + app.name + ' on Google Play">' +
+          content +
+          '<span class="showcase-preview-pill">Google Play</span>' +
+        "</a>"
+      );
+    }
+
+    function clearAutoAdvanceTimer() {
+      if (autoAdvanceTimer) {
+        window.clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = 0;
+      }
+    }
+
+    function clearTransitionClassTimer() {
+      if (transitionTimer) {
+        window.clearTimeout(transitionTimer);
+        transitionTimer = 0;
+      }
+    }
+
+    function shouldAutoAdvance() {
+      return !reducedMotionQuery.matches &&
+        !document.hidden &&
+        !userPausedAutoplay &&
+        !hoverPausedAutoplay;
+    }
+
+    function updateAutoplayButton() {
+      const autoplayActive = !userPausedAutoplay && !reducedMotionQuery.matches;
+
+      autoplayButton.disabled = reducedMotionQuery.matches;
+      autoplayButton.textContent = autoplayActive ? "Pause" : "Play";
+      autoplayButton.setAttribute("aria-pressed", autoplayActive ? "true" : "false");
+      autoplayButton.setAttribute(
+        "aria-label",
+        autoplayActive ? "Pause automatic diaporama" : "Resume automatic diaporama"
+      );
+    }
+
+    function scheduleAutoAdvance() {
+      clearAutoAdvanceTimer();
+      updateAutoplayButton();
+
+      if (!shouldAutoAdvance()) {
+        return;
+      }
+
+      autoAdvanceTimer = window.setTimeout(() => {
+        setActive(activeIndex + 1);
+      }, AUTO_ADVANCE_MS);
+    }
+
+    function syncTransitionState(immediate) {
+      clearTransitionClassTimer();
+
+      if (immediate) {
+        media.classList.remove("is-transitioning");
+        return;
+      }
+
+      media.classList.add("is-transitioning");
+      transitionTimer = window.setTimeout(() => {
+        media.classList.remove("is-transitioning");
+        transitionTimer = 0;
+      }, TRANSITION_CLASS_HOLD_MS);
+    }
+
+    function setActive(index, options = {}) {
+      const immediate = options.immediate === true;
+      activeIndex = (index + APP_PORTFOLIO.length) % APP_PORTFOLIO.length;
+      const app = APP_PORTFOLIO[activeIndex];
+
+      shell.style.setProperty("--spotlight", app.accent);
+      shell.style.setProperty("--spotlight-soft", app.accentSoft);
+      syncTransitionState(immediate);
+
+      media.innerHTML = renderShowcaseMedia(app);
+
       typeNode.textContent = app.category;
       nameNode.textContent = app.name;
       summaryNode.textContent = app.summary;
+      if (app.playUrl) {
+        storeLinkNode.hidden = false;
+        storeLinkNode.href = app.playUrl;
+        storeLinkNode.setAttribute("aria-label", "Get " + app.name + " on Google Play");
+        storeNoteNode.textContent = "Preview image opens the Google Play listing in a new tab.";
+      } else {
+        storeLinkNode.hidden = true;
+        storeLinkNode.removeAttribute("href");
+        storeLinkNode.removeAttribute("aria-label");
+        storeNoteNode.textContent = "Google Play link pending for this app entry.";
+      }
       formatNode.textContent = app.format;
       focusNode.textContent = app.focus;
       statusNode.textContent = app.status;
@@ -1631,6 +1861,8 @@
       if (activeThumb) {
         activeThumb.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
       }
+
+      scheduleAutoAdvance();
     }
 
     thumbRail.innerHTML = APP_PORTFOLIO.map((app, index) => {
@@ -1656,7 +1888,12 @@
           "<p>" + app.summary + "</p>" +
           '<div class="library-actions">' +
             '<span class="library-tag">' + app.artwork + "</span>" +
-            '<a class="ghost-link" href="#showcase" data-open-app="' + index + '">View in diaporama</a>' +
+            '<div class="library-links">' +
+              (app.playUrl
+                ? '<a class="ghost-link" href="' + app.playUrl + '" target="_blank" rel="noreferrer noopener" aria-label="Get ' + app.name + ' on Google Play">Get on Google Play</a>'
+                : "") +
+              '<a class="ghost-link" href="#showcase" data-open-app="' + index + '">View in diaporama</a>' +
+            "</div>" +
           "</div>" +
         "</article>"
       );
@@ -1680,6 +1917,20 @@
 
     prevButton.addEventListener("click", () => setActive(activeIndex - 1));
     nextButton.addEventListener("click", () => setActive(activeIndex + 1));
+    autoplayButton.addEventListener("click", () => {
+      userPausedAutoplay = !userPausedAutoplay;
+      scheduleAutoAdvance();
+    });
+
+    shell.addEventListener("mouseenter", () => {
+      hoverPausedAutoplay = true;
+      scheduleAutoAdvance();
+    });
+
+    shell.addEventListener("mouseleave", () => {
+      hoverPausedAutoplay = false;
+      scheduleAutoAdvance();
+    });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") {
@@ -1690,7 +1941,21 @@
       }
     });
 
-    setActive(1);
+    document.addEventListener("visibilitychange", () => {
+      scheduleAutoAdvance();
+    });
+
+    reducedMotionQuery.addEventListener("change", () => {
+      if (reducedMotionQuery.matches) {
+        clearAutoAdvanceTimer();
+      }
+
+      updateAutoplayButton();
+      scheduleAutoAdvance();
+    });
+
+    updateAutoplayButton();
+    setActive(1, { immediate: true });
   </script>
 </body>
 </html>
