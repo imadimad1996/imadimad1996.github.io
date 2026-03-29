@@ -216,6 +216,21 @@
       transition: color 0.18s ease, border-color 0.18s ease;
     }
 
+    .nav-links a,
+    .hero p,
+    .section-head p,
+    .showcase-summary,
+    .showcase-note,
+    .library-card p,
+    .resource-card p,
+    .support-panel p,
+    .support-list span,
+    .contact-list span,
+    .ghost-link,
+    .button {
+      overflow-wrap: anywhere;
+    }
+
     .nav-links a:hover {
       color: var(--text);
       border-color: rgba(255, 255, 255, 0.2);
@@ -792,6 +807,7 @@
       justify-content: space-between;
       gap: 1rem;
       align-items: start;
+      flex-wrap: wrap;
     }
 
     .library-head h4 {
@@ -972,12 +988,24 @@
         flex-direction: column;
       }
 
+      .brand {
+        width: 100%;
+      }
+
       .nav-links {
+        width: 100%;
         gap: 0.7rem 0.95rem;
       }
 
       .hero {
         padding-top: 3.7rem;
+      }
+
+      .hero-actions,
+      .showcase-controls,
+      .library-actions,
+      .footer-inner {
+        align-items: stretch;
       }
 
       .showcase-media {
@@ -990,6 +1018,17 @@
 
       .thumb-rail {
         grid-auto-columns: minmax(6.4rem, 1fr);
+      }
+
+      .support-list li,
+      .contact-list li {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .support-list span,
+      .contact-list span {
+        text-align: left;
       }
     }
   </style>
