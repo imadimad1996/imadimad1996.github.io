@@ -16,7 +16,21 @@
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://imadimad1996.github.io/privacy.html" />
+  <meta property="og:image" content="https://imadimad1996.github.io/assets/branding/og-image.png" />
+  <meta property="og:image:alt" content="KestrelNebula Labs logo" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Privacy Policy | KestrelNebula Labs" />
+  <meta
+    name="twitter:description"
+    content="Privacy information for the KestrelNebula Labs website and developer support communications."
+  />
+  <meta name="twitter:image" content="https://imadimad1996.github.io/assets/branding/og-image.png" />
   <link rel="canonical" href="https://imadimad1996.github.io/privacy.html" />
+  <link rel="icon" href="/assets/branding/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/branding/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/branding/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/branding/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -86,9 +100,30 @@
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
       font-family: "Space Grotesk", sans-serif;
       font-weight: 700;
       letter-spacing: 0.03em;
+    }
+
+    .brand-mark {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: block;
+      border-radius: 0.85rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      flex: 0 0 auto;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     .header-nav {
@@ -197,7 +232,12 @@
   <header class="site-header">
     <div class="container">
       <div class="header-inner">
-        <a class="brand" href="/">KestrelNebula Labs</a>
+        <a class="brand" href="/" aria-label="KestrelNebula Labs home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="/assets/branding/logo-mark.png" alt="" width="40" height="40" />
+          </span>
+          <span>KestrelNebula Labs</span>
+        </a>
         <nav class="header-nav" aria-label="Secondary">
           <a href="/">Home</a>
           <a href="/#support">Support</a>

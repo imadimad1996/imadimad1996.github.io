@@ -16,7 +16,21 @@
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://imadimad1996.github.io/" />
+  <meta property="og:image" content="https://imadimad1996.github.io/assets/branding/og-image.png" />
+  <meta property="og:image:alt" content="KestrelNebula Labs logo" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="KestrelNebula Labs | Android Developer" />
+  <meta
+    name="twitter:description"
+    content="Independent Android developer publishing utilities, scanner tools, GPS apps, and experimental games."
+  />
+  <meta name="twitter:image" content="https://imadimad1996.github.io/assets/branding/og-image.png" />
   <link rel="canonical" href="https://imadimad1996.github.io/" />
+  <link rel="icon" href="/assets/branding/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/branding/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/branding/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/branding/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -134,16 +148,22 @@
     }
 
     .brand-mark {
-      width: 2.25rem;
-      height: 2.25rem;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 35% 35%, var(--accent-strong), transparent 30%),
-        linear-gradient(135deg, #16304d, #0f1d2d);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      width: 2.75rem;
+      height: 2.75rem;
+      display: block;
+      border-radius: 0.9rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+      background: var(--surface-strong);
+      flex: 0 0 auto;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     .brand-copy {
@@ -272,6 +292,14 @@
       display: grid;
       gap: 1rem;
       align-content: start;
+    }
+
+    .panel-logo {
+      width: min(100%, 380px);
+      display: block;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
     }
 
     .hero-panel h2 {
@@ -486,6 +514,8 @@
       "name": "KestrelNebula Labs",
       "url": "https://imadimad1996.github.io/",
       "email": "mailto:imadazizimad@gmail.com",
+      "logo": "https://imadimad1996.github.io/assets/branding/android-chrome-512x512.png",
+      "image": "https://imadimad1996.github.io/assets/branding/og-image.png",
       "sameAs": [
         "https://github.com/imadimad1996"
       ],
@@ -499,7 +529,9 @@
     <div class="container">
       <div class="topbar">
         <a class="brand" href="#top" aria-label="KestrelNebula Labs home">
-          <span class="brand-mark" aria-hidden="true">K</span>
+          <span class="brand-mark" aria-hidden="true">
+            <img src="/assets/branding/logo-mark.png" alt="" width="44" height="44" />
+          </span>
           <span class="brand-copy">
             <span>KestrelNebula Labs</span>
             <span>Android developer website</span>
@@ -536,6 +568,13 @@
         </div>
 
         <aside class="hero-panel" aria-labelledby="verification-heading">
+          <img
+            class="panel-logo"
+            src="/assets/branding/logo-full.png"
+            alt="KestrelNebula Labs logo"
+            width="1024"
+            height="1024"
+          />
           <div>
             <h2 id="verification-heading">Verification-ready signals</h2>
             <p class="muted">
