@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="KestrelNebula Labs showcases Android tools, scanner utilities, GPS helpers, and arcade game concepts with clear public support resources."
+  />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a1220" />
+  <meta property="og:title" content="KestrelNebula Labs | Android Apps Portfolio" />
+  <meta
+    property="og:description"
+    content="Explore the KestrelNebula Labs Android portfolio with a featured app showcase, support resources, and public privacy links."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://imadimad1996.github.io/" />
+  <meta property="og:image" content="https://imadimad1996.github.io/assets/branding/og-image.png" />
+  <meta property="og:image:alt" content="KestrelNebula Labs logo" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="KestrelNebula Labs | Android Apps Portfolio" />
+  <meta
+    name="twitter:description"
+    content="Android tools, app concepts, and games presented through a clear public showcase."
+  />
+  <meta name="twitter:image" content="https://imadimad1996.github.io/assets/branding/og-image.png" />
+  <link rel="canonical" href="https://imadimad1996.github.io/" />
+  <link rel="icon" href="/assets/branding/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/branding/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/branding/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/branding/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <title>KestrelNebula Labs | Android Apps Portfolio</title>
+  <style>
+    :root {
+      --bg: #09101a;
+      --bg-deep: #070d15;
+      --panel: rgba(15, 24, 38, 0.82);
+      --panel-strong: rgba(16, 28, 46, 0.95);
+      --line: rgba(255, 255, 255, 0.1);
+      --text: #edf5ff;
+      --muted: #a6b8cc;
+      --accent: #73f3ff;
+      --accent-2: #7effb9;
+      --accent-3: #ffd479;
+      --focus: #91d2ff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --container: min(1200px, calc(100vw - 2rem));
+      --spotlight: rgba(115, 243, 255, 0.24);
+      --spotlight-soft: rgba(126, 255, 185, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Source Sans 3", sans-serif;
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at top left, rgba(115, 243, 255, 0.18), transparent 24%),
+        radial-gradient(circle at top right, rgba(126, 255, 185, 0.14), transparent 20%),
+        linear-gradient(180deg, #09101a 0%, #0b1523 48%, #070d15 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), transparent 94%);
+      z-index: -1;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -3rem;
+      left: 1rem;
+      z-index: 20;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      background: var(--accent-3);
+      color: #07101a;
+      font-weight: 700;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    .container {
+      width: var(--container);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 13, 21, 0.78);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 2.9rem;
+      height: 2.9rem;
+      display: block;
+      overflow: hidden;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.26);
+      flex: 0 0 auto;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.08rem;
+      min-width: 0;
+    }
+
+    .brand-copy strong,
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .brand-copy strong {
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-copy span {
+      color: var(--muted);
+      font-size: 0.84rem;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--muted);
+      align-items: center;
+    }
+
+    .nav-links a {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid transparent;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    main {
+      display: block;
+    }
+
+    section {
+      padding: 0 0 4.5rem;
+    }
+
+    .hero {
+      padding: 5rem 0 4rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 1.2rem;
+      align-items: stretch;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.85rem;
+      margin-bottom: 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(115, 243, 255, 0.22);
+      background: rgba(115, 243, 255, 0.08);
+      color: #d3fbff;
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      max-width: 10.5ch;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 62ch;
+      font-size: 1.12rem;
+      color: #d4e0ee;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.6rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3.25rem;
+      padding: 0.82rem 1.18rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.primary {
+      color: #06101a;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      box-shadow: 0 14px 28px rgba(115, 243, 255, 0.2);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-stack,
+    .signal-card,
+    .resource-card,
+    .showcase-shell,
+    .showcase-copy,
+    .library-card,
+    .support-panel,
+    .note-panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(18, 29, 46, 0.92), rgba(11, 19, 31, 0.92));
+      box-shadow: var(--shadow);
+    }
+
+    .hero-stack {
+      display: grid;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-stack::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 25% -8%;
+      width: 65%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--spotlight);
+      filter: blur(42px);
+      z-index: -1;
+    }
+
+    .hero-brand {
+      padding: 1.1rem;
+      border-radius: 1.4rem;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005)),
+        radial-gradient(circle at top left, rgba(115, 243, 255, 0.18), transparent 28%);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .hero-logo {
+      width: min(100%, 420px);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 1.4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .mini-card {
+      min-height: 10rem;
+      padding: 1rem;
+      border-radius: 1.3rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .mini-card span {
+      display: inline-flex;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #d8eff3;
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .mini-card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .signal-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .signal-card {
+      padding: 1.2rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .signal-card strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.45rem;
+      margin-bottom: 0.28rem;
+    }
+
+    .signal-card span {
+      color: var(--muted);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .showcase-shell {
+      padding: 1rem;
+      border-radius: var(--radius-xl);
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .showcase-shell::before,
+    .showcase-shell::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .showcase-shell::before {
+      width: 30rem;
+      height: 30rem;
+      top: -20%;
+      left: -12%;
+      background: var(--spotlight);
+      filter: blur(42px);
+    }
+
+    .showcase-shell::after {
+      width: 18rem;
+      height: 18rem;
+      right: -8%;
+      bottom: -14%;
+      background: var(--spotlight-soft);
+      filter: blur(36px);
+    }
+
+    .showcase-stage,
+    .showcase-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .showcase-stage {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .showcase-media {
+      position: relative;
+      min-height: 34rem;
+      overflow: hidden;
+      border-radius: 1.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 26%),
+        #0b1320;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .showcase-media img,
+    .showcase-placeholder {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .showcase-media img {
+      object-fit: cover;
+    }
+
+    .showcase-placeholder {
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background:
+        radial-gradient(circle at top left, rgba(115, 243, 255, 0.22), transparent 26%),
+        linear-gradient(135deg, #10243b, #0b1320 68%);
+    }
+
+    .placeholder-mark {
+      width: clamp(7rem, 18vw, 11rem);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: #d8fcff;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+    }
+
+    .showcase-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      background: linear-gradient(180deg, transparent, rgba(7, 13, 21, 0.88) 52%);
+    }
+
+    .showcase-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(10, 18, 32, 0.62);
+      color: #e5fbff;
+      font-size: 0.9rem;
+    }
+
+    .showcase-controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: inline-flex;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .icon-button {
+      width: 3rem;
+      height: 3rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.045);
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .icon-button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(115, 243, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .progress {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .thumb-rail {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(7.8rem, 1fr);
+      gap: 0.8rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      scrollbar-width: thin;
+    }
+
+    .thumb {
+      position: relative;
+      min-height: 6.6rem;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.1rem;
+      background: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .thumb:hover {
+      transform: translateY(-2px);
+    }
+
+    .thumb[aria-pressed="true"] {
+      border-color: rgba(115, 243, 255, 0.45);
+      box-shadow: 0 0 0 1px rgba(115, 243, 255, 0.2);
+    }
+
+    .thumb img,
+    .thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .thumb-placeholder {
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #143357, #10243b);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #d8fcff;
+    }
+
+    .thumb span {
+      position: absolute;
+      left: 0.55rem;
+      right: 0.55rem;
+      bottom: 0.5rem;
+      display: block;
+      padding: 0.22rem 0.45rem;
+      border-radius: 0.7rem;
+      background: rgba(7, 13, 21, 0.72);
+      color: #effbff;
+      font-size: 0.84rem;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .showcase-copy {
+      padding: 1.4rem;
+      border-radius: 1.7rem;
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .showcase-copy h3 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .showcase-kicker {
+      color: #dcfbff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .showcase-summary,
+    .showcase-note,
+    .resource-card p,
+    .support-panel p,
+    .library-card p,
+    .note-panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .showcase-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .meta-card {
+      padding: 0.95rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .meta-card span {
+      display: block;
+      margin-bottom: 0.22rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .meta-card strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .note-panel {
+      padding: 1rem 1.05rem;
+      border-radius: 1.2rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02)),
+        rgba(10, 18, 32, 0.86);
+    }
+
+    .library-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .library-card {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      display: grid;
+      gap: 0.95rem;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .library-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(115, 243, 255, 0.24);
+    }
+
+    .library-media {
+      width: 100%;
+      aspect-ratio: 1.35 / 1;
+      overflow: hidden;
+      border-radius: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .library-media img,
+    .library-placeholder {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .library-placeholder {
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #143357, #10243b);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #d8fcff;
+    }
+
+    .library-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .library-head h4 {
+      margin: 0 0 0.28rem;
+      font-size: 1.18rem;
+      line-height: 1.08;
+    }
+
+    .library-type {
+      color: #d8fcff;
+      font-size: 0.84rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .library-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0.28rem 0.62rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+
+    .library-actions {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .ghost-link {
+      color: #d8fcff;
+      font-weight: 700;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .resource-card,
+    .support-panel {
+      padding: 1.25rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .resource-card h3,
+    .support-panel h3 {
+      margin: 0 0 0.7rem;
+      font-size: 1.3rem;
+    }
+
+    .resource-card .button {
+      margin-top: 1rem;
+    }
+
+    .support-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+      gap: 1rem;
+    }
+
+    .support-list,
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .support-list li,
+    .contact-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.88rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .support-list li:last-child,
+    .contact-list li:last-child {
+      border-bottom: none;
+    }
+
+    .support-list strong,
+    .contact-list strong {
+      color: var(--text);
+    }
+
+    .support-list span,
+    .contact-list span {
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 1.5rem 0 2.6rem;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .showcase-shell,
+      .section-head,
+      .support-layout,
+      .signal-strip,
+      .resource-grid,
+      .library-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-meta {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      h1 {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 0.7rem 0.95rem;
+      }
+
+      .hero {
+        padding-top: 3.7rem;
+      }
+
+      .showcase-media {
+        min-height: 23rem;
+      }
+
+      .showcase-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .thumb-rail {
+        grid-auto-columns: minmax(6.4rem, 1fr);
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "KestrelNebula Labs",
+      "url": "https://imadimad1996.github.io/",
+      "email": "mailto:imadazizimad@gmail.com",
+      "logo": "https://imadimad1996.github.io/assets/branding/android-chrome-512x512.png",
+      "image": "https://imadimad1996.github.io/assets/branding/og-image.png",
+      "sameAs": [
+        "https://github.com/imadimad1996"
+      ],
+      "description": "Independent Android developer website presenting tools, utilities, and game concepts."
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <div class="topbar">
+        <a class="brand" href="#top" aria-label="KestrelNebula Labs home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="/assets/branding/logo-mark.png" alt="" width="46" height="46" />
+          </span>
+          <span class="brand-copy">
+            <strong>KestrelNebula Labs</strong>
+            <span>Android portfolio, support, and publishing identity</span>
+          </span>
+        </a>
+        <nav aria-label="Primary">
+          <div class="nav-links">
+            <a href="#showcase">Showcase</a>
+            <a href="#library">Library</a>
+            <a href="#resources">Resources</a>
+            <a href="#support">Support</a>
+            <a href="/privacy.html">Privacy</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">2026 portfolio refresh • clearer UI • visible app showcase</p>
+          <h1 id="hero-title">A sharper public home for Android apps, tools, and game concepts.</h1>
+          <p>
+            KestrelNebula Labs now presents its portfolio through a cleaner, more visible homepage:
+            one featured diaporama, one complete app library, and one obvious place for support,
+            privacy, and publishing links. The app copy is intentionally easy to update later as
+            listings evolve.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#showcase">Open app showcase</a>
+            <a class="button secondary" href="#support">Support details</a>
+          </div>
+        </div>
+
+        <aside class="hero-stack" aria-label="Studio summary">
+          <div class="hero-brand">
+            <img
+              class="hero-logo"
+              src="/assets/branding/logo-full.png"
+              alt="KestrelNebula Labs logo"
+              width="1024"
+              height="1024"
+            />
+          </div>
+          <div class="hero-grid">
+            <article class="mini-card">
+              <span>Portfolio</span>
+              <strong>14 app entries</strong>
+              <p>Utilities, scanners, GPS helpers, arcade concepts, and runner-style experiments.</p>
+            </article>
+            <article class="mini-card">
+              <span>Resources</span>
+              <strong>Public and stable</strong>
+              <p>Support email, privacy page, and app-ads.txt are all surfaced from the root site.</p>
+            </article>
+            <article class="mini-card">
+              <span>Editing</span>
+              <strong>Descriptions can change later</strong>
+              <p>The homepage diaporama reads from one central app data block near the bottom.</p>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section aria-label="Studio signals">
+        <div class="signal-strip">
+          <article class="signal-card">
+            <strong>14</strong>
+            <span>portfolio entries shown in the public library</span>
+          </article>
+          <article class="signal-card">
+            <strong>3</strong>
+            <span>utility-focused lines including conversion, GPS, and document tools</span>
+          </article>
+          <article class="signal-card">
+            <strong>11</strong>
+            <span>game or concept releases presented with showcase artwork</span>
+          </article>
+          <article class="signal-card">
+            <strong>1</strong>
+            <span>clear place for support, privacy, and AdMob publishing references</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="showcase" aria-labelledby="showcase-title">
+        <div class="section-head">
+          <div>
+            <h2 id="showcase-title">App Diaporama</h2>
+          </div>
+          <p>
+            Browse the active portfolio one app at a time. The descriptions below are editable
+            placeholders, so you can refine the product messaging later without redesigning the page.
+          </p>
+        </div>
+
+        <div class="showcase-shell" id="showcase-shell">
+          <div class="showcase-stage">
+            <div class="showcase-media" id="showcase-media" aria-live="polite"></div>
+            <div class="showcase-controls">
+              <div class="control-group">
+                <button class="icon-button" id="prev-app" type="button" aria-label="Show previous app">
+                  &#8592;
+                </button>
+                <button class="icon-button" id="next-app" type="button" aria-label="Show next app">
+                  &#8594;
+                </button>
+              </div>
+              <div class="progress" id="showcase-progress">1 / 14</div>
+            </div>
+            <div class="thumb-rail" id="thumb-rail" aria-label="App thumbnails"></div>
+          </div>
+
+          <aside class="showcase-copy">
+            <p class="showcase-kicker" id="showcase-type">Game concept</p>
+            <h3 id="showcase-name">GapDash: Ball Reflex</h3>
+            <p class="showcase-summary" id="showcase-summary"></p>
+            <div class="showcase-meta">
+              <article class="meta-card">
+                <span>Format</span>
+                <strong id="showcase-format"></strong>
+              </article>
+              <article class="meta-card">
+                <span>Focus</span>
+                <strong id="showcase-focus"></strong>
+              </article>
+              <article class="meta-card">
+                <span>Status</span>
+                <strong id="showcase-status"></strong>
+              </article>
+              <article class="meta-card">
+                <span>Artwork</span>
+                <strong id="showcase-artwork"></strong>
+              </article>
+            </div>
+            <div class="note-panel">
+              <p id="showcase-note"></p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="library" aria-labelledby="library-title">
+        <div class="section-head">
+          <div>
+            <h2 id="library-title">Complete App Library</h2>
+          </div>
+          <p>
+            Every app in the current portfolio appears here. Use this grid as the always-visible
+            overview, and use the diaporama above for the deeper spotlight view.
+          </p>
+        </div>
+        <div class="library-grid" id="library-grid"></div>
+      </section>
+
+      <section id="resources" aria-labelledby="resources-title">
+        <div class="section-head">
+          <div>
+            <h2 id="resources-title">Publishing Resources</h2>
+          </div>
+          <p>
+            These links keep the public website aligned with store, policy, and monetization
+            requirements.
+          </p>
+        </div>
+        <div class="resource-grid">
+          <article class="resource-card">
+            <h3>Privacy Policy</h3>
+            <p>
+              Public privacy information is available on a stable URL and should stay aligned with
+              Google Play disclosures and any app-specific privacy requirements.
+            </p>
+            <a class="button secondary" href="/privacy.html">Open privacy page</a>
+          </article>
+          <article class="resource-card">
+            <h3>AdMob Verification</h3>
+            <p>
+              The site root now exposes an `app-ads.txt` file so AdMob can verify authorized
+              sellers from the same developer website domain used in your Play listings.
+            </p>
+            <a class="button secondary" href="/app-ads.txt">Open app-ads.txt</a>
+          </article>
+          <article class="resource-card">
+            <h3>Brand Identity</h3>
+            <p>
+              The homepage, social previews, favicon set, and structured metadata all use the same
+              KestrelNebula Labs branding assets for a more consistent public presence.
+            </p>
+            <a class="button secondary" href="https://github.com/imadimad1996" target="_blank" rel="noreferrer noopener">View GitHub profile</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="support" aria-labelledby="support-title">
+        <div class="section-head">
+          <div>
+            <h2 id="support-title">Support And Contact</h2>
+          </div>
+          <p>
+            Keep this section simple, real, and accessible. Reviewers and users should not have to
+            search for contact details or support instructions.
+          </p>
+        </div>
+
+        <div class="support-layout">
+          <article class="support-panel">
+            <h3>Public Contact Details</h3>
+            <ul class="contact-list">
+              <li>
+                <strong>Email</strong>
+                <span><a href="mailto:imadazizimad@gmail.com">imadazizimad@gmail.com</a></span>
+              </li>
+              <li>
+                <strong>Website</strong>
+                <span><a href="https://imadimad1996.github.io/">imadimad1996.github.io</a></span>
+              </li>
+              <li>
+                <strong>GitHub</strong>
+                <span><a href="https://github.com/imadimad1996" target="_blank" rel="noreferrer noopener">github.com/imadimad1996</a></span>
+              </li>
+              <li>
+                <strong>Privacy</strong>
+                <span><a href="/privacy.html">/privacy.html</a></span>
+              </li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="mailto:imadazizimad@gmail.com?subject=KestrelNebula%20Labs%20Support">Email support</a>
+              <a class="button secondary" href="/privacy.html">Privacy policy</a>
+            </div>
+          </article>
+
+          <article class="support-panel">
+            <h3>What To Include In A Support Request</h3>
+            <p>
+              Keep support requests structured so issues can be identified faster across multiple
+              apps and release tracks.
+            </p>
+            <ul class="support-list">
+              <li>
+                <strong>App name</strong>
+                <span>Tell us exactly which app, game, or concept release your message is about.</span>
+              </li>
+              <li>
+                <strong>Device details</strong>
+                <span>Include the Android version, device model, and a short summary of the issue.</span>
+              </li>
+              <li>
+                <strong>Conversion or scanner issues</strong>
+                <span>When relevant, mention the file type, export format, or workflow step involved.</span>
+              </li>
+              <li>
+                <strong>Privacy or deletion request</strong>
+                <span>If an app includes accounts later, include the identifier needed to locate the request.</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span>© 2026 KestrelNebula Labs</span>
+        <span>Android portfolio, public resources, and support links</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /*
+      Edit app descriptions here later.
+      This array powers both the diaporama and the full app library.
+    */
+    const APP_PORTFOLIO = [
+      {
+        slug: "bounova",
+        name: "BOUNOVA",
+        category: "Arcade concept",
+        format: "Game prototype",
+        focus: "Explosive timing and visual punch",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/bounova.webp",
+        accent: "rgba(120, 105, 255, 0.26)",
+        accentSoft: "rgba(115, 243, 255, 0.14)",
+        summary: "A bold arcade concept with high-energy presentation, sharp movement, and a visual identity designed for fast sessions and instant readability.",
+        note: "Update later with the final gameplay loop, control scheme, and the specific progression or scoring system."
+      },
+      {
+        slug: "gapdash-ball-reflex",
+        name: "GapDash: Ball Reflex",
+        category: "Reflex game",
+        format: "Android game",
+        focus: "Precision taps and score chasing",
+        status: "Production-facing concept",
+        artwork: "Artwork provided",
+        image: "/assets/apps/gapdash-ball-reflex.webp",
+        accent: "rgba(103, 166, 255, 0.24)",
+        accentSoft: "rgba(255, 213, 121, 0.12)",
+        summary: "A clean reflex challenge built around timing, focus, and repeatable short play sessions that are easy to understand and satisfying to replay.",
+        note: "Update later with your real store positioning, difficulty model, and the exact feature list shown in Google Play."
+      },
+      {
+        slug: "heicflow",
+        name: "HEICFlow: HEIC to JPG/PNG/PDF",
+        category: "Conversion utility",
+        format: "Android tool",
+        focus: "Fast file conversion workflows",
+        status: "Icon pending from source folder",
+        artwork: "Fallback visual used",
+        image: "",
+        initials: "HF",
+        accent: "rgba(115, 243, 255, 0.22)",
+        accentSoft: "rgba(126, 255, 185, 0.12)",
+        summary: "A practical utility focused on converting HEIC images into common formats like JPG, PNG, and PDF with a simpler mobile workflow.",
+        note: "Update later with the real export options, batch behavior, local processing details, and any privacy-related file handling notes."
+      },
+      {
+        slug: "livespeed-gps",
+        name: "LiveSpeed GPS",
+        category: "GPS utility",
+        format: "Android tool",
+        focus: "Real-time speed visibility",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/livespeed-gps.webp",
+        accent: "rgba(126, 255, 185, 0.22)",
+        accentSoft: "rgba(115, 243, 255, 0.1)",
+        summary: "A travel-oriented utility that likely centers on live GPS speed information, quick visibility, and a lightweight mobile dashboard experience.",
+        note: "Update later with the actual trip, units, permissions, background behavior, and any map or speed warning features."
+      },
+      {
+        slug: "neonbot-rush",
+        name: "NeonBot Rush",
+        category: "Runner concept",
+        format: "Android game",
+        focus: "Momentum, dodging, and pace",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/neonbot-rush.webp",
+        accent: "rgba(115, 243, 255, 0.2)",
+        accentSoft: "rgba(255, 113, 209, 0.14)",
+        summary: "A neon-styled action concept built around quick reaction, forward momentum, and visual clarity for high-speed arcade play.",
+        note: "Update later with the final game loop, obstacle system, endless-runner mechanics, and monetization or reward structure."
+      },
+      {
+        slug: "plynk",
+        name: "PLYNK",
+        category: "Abstract concept",
+        format: "Android game",
+        focus: "Minimal form and responsive feel",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/plynk.webp",
+        accent: "rgba(255, 213, 121, 0.18)",
+        accentSoft: "rgba(115, 243, 255, 0.12)",
+        summary: "An abstract mobile concept that reads as compact, stylized, and suited for short bursts of interaction with a simple visual identity.",
+        note: "Update later with the real mechanic, whether it is puzzle or arcade driven, and how players progress through sessions."
+      },
+      {
+        slug: "slynk",
+        name: "SLYNK",
+        category: "Neon concept",
+        format: "Android game",
+        focus: "Smooth movement and glowing minimalism",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/slynk.webp",
+        accent: "rgba(126, 255, 185, 0.22)",
+        accentSoft: "rgba(115, 243, 255, 0.1)",
+        summary: "A striking neon concept that suggests fluid movement, simple controls, and a clean visual style with a memorable glowing mark.",
+        note: "Update later with the actual play style, whether it is snake-inspired, puzzle-led, or reflex-based."
+      },
+      {
+        slug: "scanelix-scanner-pdf-tools",
+        name: "Scanelix Scanner & PDF Tools",
+        category: "Document utility",
+        format: "Android productivity tool",
+        focus: "Scan, organize, and export",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/scanelix-scanner-pdf-tools.webp",
+        accent: "rgba(115, 243, 255, 0.18)",
+        accentSoft: "rgba(126, 255, 185, 0.12)",
+        summary: "A scanner and PDF toolkit aimed at everyday document workflows such as capture, cleanup, export, and quick mobile sharing.",
+        note: "Update later with the real scan modes, OCR status, merge tools, compression, and export capabilities."
+      },
+      {
+        slug: "skyhold",
+        name: "Skyhold",
+        category: "Fantasy concept",
+        format: "Android game",
+        focus: "Atmosphere and world identity",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/skyhold.webp",
+        accent: "rgba(115, 243, 255, 0.18)",
+        accentSoft: "rgba(255, 213, 121, 0.12)",
+        summary: "A fantasy-styled game concept that suggests larger worldbuilding, atmospheric presentation, and a strong visual theme beyond a casual prototype feel.",
+        note: "Update later with the genre, whether it is strategy, action, or exploration, and the specific player objective."
+      },
+      {
+        slug: "trashpaws-runner",
+        name: "TrashPaws Runner",
+        category: "Character runner",
+        format: "Android game",
+        focus: "Charming pacing and replay value",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/trashpaws-runner.webp",
+        accent: "rgba(255, 213, 121, 0.2)",
+        accentSoft: "rgba(126, 255, 185, 0.1)",
+        summary: "A playful runner concept with strong character identity and a format that fits quick retries, collectible flow, and lighthearted momentum.",
+        note: "Update later with the lane system, power-ups, collectibles, and progression hooks that define the real experience."
+      },
+      {
+        slug: "vertica",
+        name: "VERTICA",
+        category: "Vertical reflex concept",
+        format: "Android game",
+        focus: "Upward movement and precision",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/vertica.webp",
+        accent: "rgba(115, 243, 255, 0.2)",
+        accentSoft: "rgba(255, 99, 160, 0.12)",
+        summary: "A concept positioned around verticality, clean motion, and precision timing, with presentation that feels better suited to modern arcade players.",
+        note: "Update later with the actual vertical mechanic, fail states, and progression model."
+      },
+      {
+        slug: "verdara",
+        name: "Verdara",
+        category: "Nature-inspired concept",
+        format: "Android game",
+        focus: "Mood, color, and identity",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/verdara.webp",
+        accent: "rgba(126, 255, 185, 0.18)",
+        accentSoft: "rgba(115, 243, 255, 0.12)",
+        summary: "A concept with a stronger world or theme identity, likely suited for a more atmospheric, visually led mobile experience.",
+        note: "Update later with the real genre, core interaction model, and what makes the product different from the rest of the portfolio."
+      },
+      {
+        slug: "hyperrift",
+        name: "HyperRift",
+        category: "Sci-fi arcade concept",
+        format: "Android game",
+        focus: "Speed and futuristic energy",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/hyperrift.webp",
+        accent: "rgba(255, 96, 221, 0.18)",
+        accentSoft: "rgba(115, 243, 255, 0.12)",
+        summary: "A high-energy sci-fi concept that suggests rift, portal, or fast-space themes with a clear modern arcade direction.",
+        note: "Update later with the actual mechanic, whether it uses dodging, shooting, racing, or portal movement."
+      },
+      {
+        slug: "nova-ship",
+        name: "Nova Ship",
+        category: "Spaceflight concept",
+        format: "Android game",
+        focus: "Ship control and cosmic action",
+        status: "Description ready to refine later",
+        artwork: "Artwork provided",
+        image: "/assets/apps/nova-ship.webp",
+        accent: "rgba(115, 243, 255, 0.18)",
+        accentSoft: "rgba(255, 113, 209, 0.12)",
+        summary: "A space-themed concept with a cleaner iconic identity, suited to score chasing, evasive control, and fast visual feedback.",
+        note: "Update later with the ship controls, enemies, level structure, and whether the game is endless or stage based."
+      }
+    ];
+
+    const shell = document.getElementById("showcase-shell");
+    const media = document.getElementById("showcase-media");
+    const nameNode = document.getElementById("showcase-name");
+    const typeNode = document.getElementById("showcase-type");
+    const summaryNode = document.getElementById("showcase-summary");
+    const formatNode = document.getElementById("showcase-format");
+    const focusNode = document.getElementById("showcase-focus");
+    const statusNode = document.getElementById("showcase-status");
+    const artworkNode = document.getElementById("showcase-artwork");
+    const noteNode = document.getElementById("showcase-note");
+    const progressNode = document.getElementById("showcase-progress");
+    const thumbRail = document.getElementById("thumb-rail");
+    const libraryGrid = document.getElementById("library-grid");
+    const prevButton = document.getElementById("prev-app");
+    const nextButton = document.getElementById("next-app");
+
+    let activeIndex = 0;
+
+    function initialsFromName(name) {
+      return name
+        .split(/[\s:&-]+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part.charAt(0))
+        .join("")
+        .toUpperCase();
+    }
+
+    function renderArtwork(app, eager) {
+      if (app.image) {
+        return (
+          '<img src="' + app.image + '" alt="' + app.name + ' artwork" width="1200" height="900"' +
+          (eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"') +
+          " />"
+        );
+      }
+
+      return (
+        '<div class="showcase-placeholder">' +
+          '<div class="placeholder-mark">' + (app.initials || initialsFromName(app.name)) + "</div>" +
+        "</div>"
+      );
+    }
+
+    function renderThumbArtwork(app) {
+      if (app.image) {
+        return '<img src="' + app.image + '" alt="" loading="lazy" decoding="async" width="240" height="180" />';
+      }
+
+      return '<div class="thumb-placeholder">' + (app.initials || initialsFromName(app.name)) + "</div>";
+    }
+
+    function renderLibraryArtwork(app) {
+      if (app.image) {
+        return '<img src="' + app.image + '" alt="' + app.name + ' artwork" loading="lazy" decoding="async" width="640" height="480" />';
+      }
+
+      return '<div class="library-placeholder">' + (app.initials || initialsFromName(app.name)) + "</div>";
+    }
+
+    function setActive(index) {
+      activeIndex = (index + APP_PORTFOLIO.length) % APP_PORTFOLIO.length;
+      const app = APP_PORTFOLIO[activeIndex];
+
+      shell.style.setProperty("--spotlight", app.accent);
+      shell.style.setProperty("--spotlight-soft", app.accentSoft);
+
+      media.innerHTML =
+        renderArtwork(app, true) +
+        '<div class="showcase-overlay">' +
+          '<div>' +
+            '<div class="showcase-badges">' +
+              '<span class="badge">' + app.category + "</span>" +
+              '<span class="badge">' + app.format + "</span>" +
+            "</div>" +
+          "</div>" +
+          '<div class="badge">' + app.artwork + "</div>" +
+        "</div>";
+
+      typeNode.textContent = app.category;
+      nameNode.textContent = app.name;
+      summaryNode.textContent = app.summary;
+      formatNode.textContent = app.format;
+      focusNode.textContent = app.focus;
+      statusNode.textContent = app.status;
+      artworkNode.textContent = app.artwork;
+      noteNode.textContent = app.note;
+      progressNode.textContent = String(activeIndex + 1) + " / " + String(APP_PORTFOLIO.length);
+
+      Array.from(thumbRail.querySelectorAll(".thumb")).forEach((button, buttonIndex) => {
+        button.setAttribute("aria-pressed", buttonIndex === activeIndex ? "true" : "false");
+      });
+
+      const activeThumb = thumbRail.querySelector('[data-index="' + activeIndex + '"]');
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+      }
+    }
+
+    thumbRail.innerHTML = APP_PORTFOLIO.map((app, index) => {
+      return (
+        '<button class="thumb" type="button" data-index="' + index + '" aria-pressed="false" aria-label="Show ' + app.name + '">' +
+          renderThumbArtwork(app) +
+          "<span>" + app.name + "</span>" +
+        "</button>"
+      );
+    }).join("");
+
+    libraryGrid.innerHTML = APP_PORTFOLIO.map((app, index) => {
+      return (
+        '<article class="library-card">' +
+          '<div class="library-media">' + renderLibraryArtwork(app) + "</div>" +
+          '<div class="library-head">' +
+            "<div>" +
+              '<div class="library-type">' + app.category + "</div>" +
+              "<h4>" + app.name + "</h4>" +
+            "</div>" +
+            '<span class="library-tag">' + app.format + "</span>" +
+          "</div>" +
+          "<p>" + app.summary + "</p>" +
+          '<div class="library-actions">' +
+            '<span class="library-tag">' + app.artwork + "</span>" +
+            '<a class="ghost-link" href="#showcase" data-open-app="' + index + '">View in diaporama</a>' +
+          "</div>" +
+        "</article>"
+      );
+    }).join("");
+
+    thumbRail.addEventListener("click", (event) => {
+      const target = event.target.closest(".thumb");
+      if (!target) {
+        return;
+      }
+      setActive(Number(target.dataset.index));
+    });
+
+    libraryGrid.addEventListener("click", (event) => {
+      const target = event.target.closest("[data-open-app]");
+      if (!target) {
+        return;
+      }
+      setActive(Number(target.dataset.openApp));
+    });
+
+    prevButton.addEventListener("click", () => setActive(activeIndex - 1));
+    nextButton.addEventListener("click", () => setActive(activeIndex + 1));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        setActive(activeIndex - 1);
+      }
+      if (event.key === "ArrowRight") {
+        setActive(activeIndex + 1);
+      }
+    });
+
+    setActive(1);
+  </script>
+</body>
+</html>
