@@ -464,6 +464,7 @@
       gap: 1rem;
       position: relative;
       overflow: hidden;
+      overflow-anchor: none;
     }
 
     .showcase-shell::before,
@@ -1689,6 +1690,7 @@
     let userPausedAutoplay = false;
     let hoverPausedAutoplay = false;
     let hasInitialThumbRailScroll = false;
+    let showcaseInView = typeof window.IntersectionObserver === "undefined";
 
     function initialsFromName(name) {
       return name
@@ -1776,7 +1778,8 @@
     }
 
     function shouldAutoAdvance() {
-      return !reducedMotionQuery.matches &&
+      return showcaseInView &&
+        !reducedMotionQuery.matches &&
         !document.hidden &&
         !userPausedAutoplay &&
         !hoverPausedAutoplay;
@@ -1946,6 +1949,18 @@
       hoverPausedAutoplay = false;
       scheduleAutoAdvance();
     });
+
+    if (typeof window.IntersectionObserver !== "undefined") {
+      const showcaseObserver = new window.IntersectionObserver((entries) => {
+        const [entry] = entries;
+        showcaseInView = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+        scheduleAutoAdvance();
+      }, {
+        threshold: [0, 0.35, 0.6]
+      });
+
+      showcaseObserver.observe(shell);
+    }
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") {
