@@ -1680,7 +1680,7 @@
     const autoplayButton = document.getElementById("toggle-autoplay");
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const AUTO_ADVANCE_MS = 2000;
+    const AUTO_ADVANCE_MS = 3000;
     const TRANSITION_CLASS_HOLD_MS = 70;
 
     let activeIndex = 0;
@@ -1688,6 +1688,7 @@
     let transitionTimer = 0;
     let userPausedAutoplay = false;
     let hoverPausedAutoplay = false;
+    let hasInitialThumbRailScroll = false;
 
     function initialsFromName(name) {
       return name
@@ -1821,8 +1822,21 @@
       }, TRANSITION_CLASS_HOLD_MS);
     }
 
+    function scrollThumbRailToActiveThumb(activeThumb, behavior) {
+      const targetCenter = activeThumb.offsetLeft + activeThumb.offsetWidth / 2;
+      const railCenter = thumbRail.clientWidth / 2;
+      const maxScrollLeft = Math.max(thumbRail.scrollWidth - thumbRail.clientWidth, 0);
+      const nextScrollLeft = Math.min(Math.max(targetCenter - railCenter, 0), maxScrollLeft);
+
+      thumbRail.scrollTo({
+        left: nextScrollLeft,
+        behavior
+      });
+    }
+
     function setActive(index, options = {}) {
       const immediate = options.immediate === true;
+      const shouldAutoScrollThumbRail = options.autoScrollThumbRail === true && !hasInitialThumbRailScroll;
       activeIndex = (index + APP_PORTFOLIO.length) % APP_PORTFOLIO.length;
       const app = APP_PORTFOLIO[activeIndex];
 
@@ -1858,8 +1872,9 @@
       });
 
       const activeThumb = thumbRail.querySelector('[data-index="' + activeIndex + '"]');
-      if (activeThumb) {
-        activeThumb.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+      if (activeThumb && shouldAutoScrollThumbRail) {
+        scrollThumbRailToActiveThumb(activeThumb, "smooth");
+        hasInitialThumbRailScroll = true;
       }
 
       scheduleAutoAdvance();
@@ -1955,7 +1970,7 @@
     });
 
     updateAutoplayButton();
-    setActive(1, { immediate: true });
+    setActive(1, { immediate: true, autoScrollThumbRail: true });
   </script>
 </body>
 </html>
